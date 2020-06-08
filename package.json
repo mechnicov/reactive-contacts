@@ -4,6 +4,10 @@
   "description": "Contacts manager app",
   "main": "server.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
