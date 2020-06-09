@@ -14,13 +14,29 @@ router.post(
     check('email', 'Email is invalid').isEmail(),
     check('password', 'Password must contains minimun 6 characters').isLength({ min: 6 })
   ],
-  (req, res) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() })
-  }
+  async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
 
-  res.send('passed')
-})
+    const { name, email, password } = req.body
+
+    try {
+      let user = await User.findOne({ email })
+
+      if (user) {
+        return res.status(422).json({ msg: 'User already exists' })
+      }
+
+      user = new User({ name, email, password })
+
+    } catch (err) {
+
+    }
+
+    res.send('passed')
+  }
+)
 
 module.exports = router
