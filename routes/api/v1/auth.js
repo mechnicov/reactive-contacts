@@ -11,8 +11,15 @@ const User = require('../../../models/User')
 // @route   GET  api/v1/auth
 // @desc    Getted logged in user
 // @access  Private
-router.get('/', auth, (req, res) => {
-  res.send('Getted logged in user')
+router.get('/', auth, async (req, res) => {
+  // res.send('Getted logged in user')
+  try {
+    const user = await User.findById(req.user.id).select('-password')
+    res.json(user)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
 })
 
 // @route   POST  api/v1/auth
