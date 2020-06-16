@@ -6,7 +6,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "yarn --cwd client start",
+    "clientinstall": "yarn --cwd client install",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
