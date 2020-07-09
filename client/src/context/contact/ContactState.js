@@ -30,6 +30,7 @@ const ContactState = props => {
         type: 'professional'
       },
     ],
+    current: null
   }
 
   const [state, dispatch] = useReducer(ContactReducer, initialState)
@@ -59,6 +60,7 @@ const ContactState = props => {
     <ContactContext.Provider
       value={{
         contacts: state.contacts,
+        current: state.current,
         addContact,
         deleteContact
       }}
