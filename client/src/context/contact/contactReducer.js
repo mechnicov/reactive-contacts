@@ -25,6 +25,11 @@ export default (state, action) => {
         ...state,
         current: action.payload
       }
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null
+      }
     default:
       return state
   }
