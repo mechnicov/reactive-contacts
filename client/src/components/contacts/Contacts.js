@@ -4,11 +4,17 @@ import ContactItem from './ContactItem'
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext)
-  const { contacts } = contactContext
+  const { contacts, filtered } = contactContext
+
+  if (contacts.length === 0) {
+    return <h4>There is no contacts</h4>
+  }
 
   return (
     <Fragment>
-      {contacts.map(contact => <ContactItem key={contact.id} contact={contact}/>)}
+      {filtered === null ?
+        contacts.map(contact => <ContactItem key={contact.id} contact={contact}/>) :
+        filtered.map(contact => <ContactItem key={contact.id} contact={contact}/>)}
     </Fragment>
   )
 }
