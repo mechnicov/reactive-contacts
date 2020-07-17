@@ -44,6 +44,11 @@ export default (state, action) => {
           return `${name} ${email} ${phone}`.match(regexp)
         })
       }
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null
+      }
     default:
       return state
   }
