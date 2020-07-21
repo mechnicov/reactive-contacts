@@ -7,6 +7,7 @@ import {
   ADD_CONTACT,
   UPDATE_CONTACT,
   DELETE_CONTACT,
+  GET_CONTACTS,
   CONTACT_ERROR,
   SET_CURRENT,
   CLEAR_CURRENT,
@@ -60,6 +61,16 @@ const ContactState = props => {
     dispatch({type: UPDATE_CONTACT, payload: contact})
   }
 
+  // Get contacts
+  const getContacts = async () => {
+    try {
+      const res = await axios.get('api/v1/contacts')
+      dispatch({type: GET_CONTACTS, payload: res.data})
+    } catch (err) {
+      dispatch({type: CONTACT_ERROR, payload: err.response.msg})
+    }
+  }
+
   // Filter contacts
   const filterContacts = text => {
     dispatch({type: FILTER_CONTACTS, payload: text})
@@ -80,6 +91,7 @@ const ContactState = props => {
         addContact,
         updateContact,
         deleteContact,
+        getContacts,
         setCurrent,
         clearCurrent,
         filterContacts,
